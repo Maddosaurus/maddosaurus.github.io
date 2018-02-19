@@ -1,9 +1,0 @@
----
-layout: post
-title:  "Welcome"
-date:   2018-02-19 17:33:27 +0100
-categories: misc
----
-Hi there! Currently, I am working on my masters' thesis in Computer Science.  
-This blog doubles as kind of memo / definition dump and code snippet collection.  
-Maybe you find something here that you like? If so, don't hesitate to contact me!
