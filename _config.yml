@@ -24,7 +24,7 @@ twitter_username: mat_zilla
 github_username:  maddosaurus
 
 # Build settings
-theme: minima
+theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
 
