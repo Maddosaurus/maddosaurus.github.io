@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "What are IDS"
+title:  "What are Intrusion Detection Systems?"
 date:   2018-02-24 10:38:20 +0100
 categories: definitions ids master
 ---
@@ -16,4 +16,7 @@ On the other hand, network-based systems sit in between network traffic and moni
 The effectiveness of NIDS (Network-based IDS) differs with the point of deployment, as they can only analyze the traffic that passes the specific point of deployment.  
 It is therefore advised to deploy NIDS on the borders or chokepoints of a network to ensure broad protection.  
 Although it has to be noted that NIDS pose an inherent performance problem:  
-If all data is processed online (that is, real time), these systems need to be equipped with sufficient network bandwidth and processing power.
+If all data is processed online (that is, real time), these systems need to be equipped with sufficient network bandwidth and processing power.  
+
+IDS can also be categorized by their detection mehtod (signature- vs anomaly-based).  
+Check my [post on the differences here.](https://maddosaurus.github.io/definitions/ids/master/2018/02/20/signature-vs-anomaly-detection.html)
