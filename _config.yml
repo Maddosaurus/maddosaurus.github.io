@@ -23,8 +23,13 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: mat_zilla
 github_username:  maddosaurus
 
+# local debug: posts didn't show up
+future: true
+
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
 
+# https://stackoverflow.com/questions/19483975/jekyll-on-github-pages-any-way-to-add-footnotes-in-markdown
+markdown: kramdown

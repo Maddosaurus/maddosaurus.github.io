@@ -10,7 +10,7 @@ I like to leave the heavy lifting and processing to machines that are really goo
 That's where Machine Learning comes into play.  
 
 ### Traditional Programming vs Machine Learning
-[[Chollet2018](https://www.manning.com/books/deep-learning-with-python)] defines classical programming as something that takes rules and data and transforms this into answers.  
+[[Chollet2018](https://www.manning.com/books/deep-learning-with-python)][^1] defines classical programming as something that takes rules and data and transforms this into answers.  
 In contrast, machine learning takes answers and data and transforms this into rules.  
 Let that sink for a moment.  
 Machine Learning takes answers (the desired state or category, i.e. attack category) and data (annotated training data) and produces rules.  
@@ -37,7 +37,12 @@ Finally, there it is: The buzzword named "Deep Learning".
 While it has been in the media in recent times, bullshit-free definitions are kind of hard to come by.  
 So let's try and change that:  
 Deep Learning is a different way of building a machine learning application. While traditional (shallow) takes usually consist of a single processing layer, deep learning differs.  
-Deep learning techniques usually consist of networks of interconnected layers, of which at least one layer can be defined as "hidden layer" [[Cylance 2017](https://www.amazon.de/Introduction-Artificial-Intelligence-Security-Professionals-ebook/dp/B07654CFFQ)].  
+Deep learning techniques usually consist of networks of interconnected layers, of which at least one layer can be defined as "hidden layer" [[Cylance 2017](https://www.amazon.de/Introduction-Artificial-Intelligence-Security-Professionals-ebook/dp/B07654CFFQ)].[^2]  
 A hidden layers output is only used as input for another layer, therefore the name.  
 
 There are many more ways of categorizing and grouping the vast number of algorithms out there, but for now, this should give you a rough idea of the general terminology.
+
+-------
+
+[^1]: Highly recommended read! - at least for building Deep Learning based on Keras / Python
+[^2]: This book is an interesting read as well!
