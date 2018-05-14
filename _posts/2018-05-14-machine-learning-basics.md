@@ -16,7 +16,7 @@ Let that sink for a moment.
 Machine Learning takes answers (the desired state or category, i.e. attack category) and data (annotated training data) and produces rules.  
 These rules can be applied to previously unseen data to categorise it.  
 
-## Supervised and Unsupervised Learning
+### Supervised and Unsupervised Learning
 At this point you probably encountered various kinds of categories to sort the plethora of different ML algorithms into.  
 One of the ways to sort your algorithms could be the distinction of supervised and unsupervised algos.  
 
@@ -32,7 +32,7 @@ To conquer these problems, a kind-of-third category has been introduced: semi-su
 In semi-supervised learning, the algorithm at hand is usually presented with a small ammount of labled data combined with large ammounts of unlabeled data.  
 This serves in kickstarting it with precise data while at the same time saving the authors the tedious task of annotating large quantities of data.
 
-## Shallow and Deep Learning
+### Shallow and Deep Learning
 Finally, there it is: The buzzword named "Deep Learning".  
 While it has been in the media in recent times, bullshit-free definitions are kind of hard to come by.  
 So let's try and change that:  
