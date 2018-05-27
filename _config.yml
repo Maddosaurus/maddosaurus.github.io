@@ -26,6 +26,11 @@ github_username:  maddosaurus
 #getting rid of categories in the url
 permalink: /:year/:month/:day/:title
 
+#show previews
+show_excerpts: true
+excerpt_separator: <!--more-->
+
+
 # local debug: posts didn't show up
 future: true
 

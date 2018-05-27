@@ -9,6 +9,8 @@ Now I have to say, I am a really lazy person, as many Computer Science people ar
 I like to leave the heavy lifting and processing to machines that are really good and efficient at this task.  
 That's where Machine Learning comes into play.  
 
+<!--more-->
+
 ### Traditional Programming vs Machine Learning
 [[Chollet2018](https://www.manning.com/books/deep-learning-with-python)][^1] defines classical programming as something that takes rules and data and transforms this into answers.  
 In contrast, machine learning takes answers and data and transforms this into rules.  

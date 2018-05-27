@@ -7,6 +7,9 @@ tags: definitions ids master
 Interconnected computer systems have an ever increasing importance in our modern lives.  
 As these networks grow in complexity, human-based monitoring of activities is unlikely to find malicious activity.  
 Therefore it can be beneficent to add another layer of defense into the system after authorization and authentication to ensure that possible intrusions are detected and reported.  
+
+<!--more-->
+
 An intrusion can be defined as "any set of actions that attempt to compromise the integrity, confidentiality or availability of a resource" [[Heady1990]](https://www.researchgate.net/publication/242637613_The_architecture_of_a_network_level_intrusion_detection_system).  
 
 An IDS (intrusion detection system) is a system that protects *resources*, uses *models* that characterize a normal or illegitimate state and makes use of *techniques* that compare the current state of the system under evaluation to the defined models. [[Lee1998]](https://dl.acm.org/citation.cfm?id=1267555). They can be classified as either host-based or network-based systems.  

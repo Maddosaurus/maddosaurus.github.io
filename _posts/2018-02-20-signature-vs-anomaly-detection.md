@@ -7,6 +7,8 @@ tags: definitions ids master
 As [[Wang2017]](http://ieeexplore.ieee.org/document/8171733/) and [[Lee1998]](https://dl.acm.org/citation.cfm?id=1267555) state, IDS detection can be classified either as signature-based or anomaly-based detection.  
 If you need a little primer on intrusion detection systems, read my [post on defining IDS in the wild.](https://maddosaurus.github.io/definitions/ids/master/2018/02/24/what-are-ids.html)
 
+<!--more-->
+
 ### Signature-based detection
 Signature-based detection, also known as misuse detection, uses "patterns of well-known attacks or weak spots of the system to identify intrusions" [Lee1990].
 This bears similarity with Anti-Virus solutions, as their detection model is also (partly) based on attack signatures.  
