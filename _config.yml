@@ -23,6 +23,9 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: mat_zilla
 github_username:  maddosaurus
 
+#getting rid of categories in the url
+permalink: /:year/:month/:day/:title
+
 # local debug: posts didn't show up
 future: true
 

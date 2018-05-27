@@ -2,7 +2,7 @@
 layout: post
 title:  "Machine Learning Basics"
 date:   2018-05-14 22:29 +0100
-categories: definitions ml master
+tags: definitions ml master
 ---
 Until now, we have successfully defined what an Intrusion Detection System is and how it can be categorized.  
 Now I have to say, I am a really lazy person, as many Computer Science people are.  

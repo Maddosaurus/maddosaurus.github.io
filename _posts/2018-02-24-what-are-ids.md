@@ -2,7 +2,7 @@
 layout: post
 title:  "What are Intrusion Detection Systems?"
 date:   2018-02-24 10:38:20 +0100
-categories: definitions ids master
+tags: definitions ids master
 ---
 Interconnected computer systems have an ever increasing importance in our modern lives.  
 As these networks grow in complexity, human-based monitoring of activities is unlikely to find malicious activity.  
