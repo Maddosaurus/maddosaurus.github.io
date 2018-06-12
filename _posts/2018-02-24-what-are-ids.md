@@ -22,4 +22,4 @@ Although it has to be noted that NIDS pose an inherent performance problem:
 If all data is processed online (that is, real time), these systems need to be equipped with sufficient network bandwidth and processing power.  
 
 IDS can also be categorized by their detection mehtod (signature- vs anomaly-based).  
-Check my [post on the differences here.](https://maddosaurus.github.io/definitions/ids/master/2018/02/20/signature-vs-anomaly-detection.html)
+Check my [post on the differences here.]({{ site.baseurl }}{% post_url 2018-02-20-signature-vs-anomaly-detection%})
