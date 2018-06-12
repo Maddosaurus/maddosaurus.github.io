@@ -47,7 +47,7 @@ You need to set your inputs:
 `vim $SPLUNK_HOME/etc/apps/Splunk_TA_stream/local/inputs.conf`
 ``` ini
 [streamfwd://streamfwd]
-splunk_stream_app_location = https://localhost:8000/en-us/custom/splunk_app_stream/
+splunk_stream_app_location = https://$SPLUNK_HOST:8000/en-us/custom/splunk_app_stream/
 stream_forwarder_id =
 disabled = 0
 ```
