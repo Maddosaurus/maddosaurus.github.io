@@ -10,7 +10,7 @@ There are many commercial services available, i.e. [vmray](https://www.vmray.com
 <!--more-->
 
 ## What is cuckoo?
-Cuckoo is an open source software for automated dynamic analyis of suspicious files.  
+Cuckoo is an open source software for automated dynamic analysis of suspicious files.  
 To do so it makes use of a Windows VM (Linux is currently only partially supported) to run and analyze the behaviour of files.  
 
 ## Installation
