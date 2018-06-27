@@ -49,7 +49,7 @@ This is why the Suricata VM has three dedicated network adapters as well:
 The management net is engineered to be kind of a safe zone for data collection and visualization.  
 This is why the main __SIEM__ (Splunk) as well as a common __IDS__ Suricata are living here.  
 IDS net 1 contains various support VMs that are designed to aid in daily use, i.e. a staging VM for exchanging malware with a victim VM.  
-This is also the network where my cuckoo sandbox installation[^2] lives right now.
+This is also the network where my [cuckoo sandbox installation]({{ site.baseurl }}{% post_url 2018-06-26-cuckoo-esx%}) lives right now.
 IDS net 2 only contains victims that will be infected with malware for dynamic anaylsis.
 
 <div class="mermaid">
@@ -73,4 +73,3 @@ In my case, I chose to set up [Netflow monitoring with Splunk]({{ site.baseurl }
 ----------
 
 [^1]: Robinson, Tony V. (2017). Building Virtual Machine Labs: A Hands-On Guide. 1st Ed. CreateSpaceIndependentPublishingPlatform. ISBN:978-1546932635.
-[^2]: This topic will be discussed in a later post
