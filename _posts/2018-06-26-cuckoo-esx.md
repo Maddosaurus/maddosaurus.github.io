@@ -17,7 +17,7 @@ To do so it makes use of a Windows VM (Linux is currently only partially support
 Please have a look at the Cuckoo [ESXi FAQ](https://docs.cuckoosandbox.org/en/latest/faq/#what-do-i-need-to-use-cuckoo-with-vmware-esxi) first: You need a licensed version of VMWare ESX;  
 **the free version won't be sufficient**.  
 Apart from this, I can wholeheartly recommend the official [Cuckoo installation guide](https://docs.cuckoosandbox.org/en/latest/installation/) that shows in great depth the requirements and steps to reproduce.  
-Additionally, there are some concrete details of how I adapted various details to my lab environment that I introduced [here]({{ site.baseurl }}{% post_url 2018-06-12-lab-overview%}).  
+Additionally, there are some concrete details of how I adapted various details to my lab environment that I introduced [here]({{ site.baseurl }}{% post_url 2018-06-12-lab-overview%}). Also, the Cuckoo docs do not cover ESX installation in depth, wich will hopefully change soon.  
 
 ## Master Network Configuration
 As I wanted to be able to make use of the PCAP feature, I made sure to route all traffic of Client VMs through the Cuckoo master.  
