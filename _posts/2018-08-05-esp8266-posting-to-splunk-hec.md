@@ -87,7 +87,7 @@ This is the JSON I am sending with this code:
 
 There is some debug output available through the `/dev/tty` serial console.  
 Just set it to baud 9600 and have a look at whats happening.  
-Without further ado, here's the source (also available as a Gist on Github)
+Without further ado, here's the source (also available as a [Gist on Github](https://gist.github.com/Maddosaurus/228ae0e3006223562a93eca18a64e2d9)).
 
 ```cpp
 // AS LONG AS PULL REQUEST 2821 IS NOT MERGED, YOU NEED TO PATCH THE ESP8266 BOARD LIB!
