@@ -9,7 +9,13 @@ I recently acquired a DHT22 temperature and humidity sensor and though to myself
 
 <!--more-->
 
-# Logical Layout
+## Final Product
+A bit of a tradition right from the start: A glance at the finished PoC.  
+There are two gauges that display the current temperature and humidity, as well as a time series display for historical data that can be scaled through the attached timepicker.  
+The whole dashboard didn't took me longer than 30 minutes to put together - Splunk really makes this easy.  
+![Splunk dashboard](https://i.imgur.com/LcbQapY.png){:class="img-responsive"}
+
+## Logical Layout
 So basically, a DHT22 is attached to an ESP8266, feeding of its power line and providing its sensor data to the ESP if needed.  
 The ESP in turn is connected to my WiFi at home and sends the current values for temperature, humidity and heat index to my Splunk instance once a minute.  
 This is done through the magic of the [Splunk HTTP Event Collector](http://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector), which I have set up and running using HTTPS only.
@@ -81,5 +87,100 @@ This is the JSON I am sending with this code:
 
 There is some debug output available through the `/dev/tty` serial console.  
 Just set it to baud 9600 and have a look at whats happening.  
-Without further ado, here's the source:  
-{% gist 228ae0e3006223562a93eca18a64e2d9 esp_temp_sensor_splunk_hec.ino %}
+Without further ado, here's the source (also available as a Gist on Github)
+
+```cpp
+// AS LONG AS PULL REQUEST 2821 IS NOT MERGED, YOU NEED TO PATCH THE ESP8266 BOARD LIB!
+// have a look here: https://www.esp8266.com/viewtopic.php?f=29&t=16473
+// and here: https://github.com/esp8266/Arduino/pull/2821
+
+#include "DHT.h"
+#include <ESP8266HTTPClient.h>
+#include <ESP8266WiFi.h>
+#include <ArduinoJson.h>
+
+#define DHTPIN 2     // This is silkscreened as ~D4 on my board
+#define DHTTYPE DHT22   // Sensor type
+
+DHT dht(DHTPIN, DHTTYPE);
+
+// WiFi to connect to
+const char* ssid = "xxxxxx";
+const char* password = "xxxxxxx";
+
+// Splunk server to send data to
+// Get this: openssl s_client -connect host.local:port | openssl x509 -fingerprint -noout
+const char* splunk_collector_cert = "AA:BB:CC:DD:EE"; // This is the SHA-1 hash of the cert
+const char* splunk_collector_url = "https://your.splunk.target:8088/services/collector";
+const char* splunk_HEC_Token = "Splunk abcde-splunk-hec-token-asdg"; // IMPORTANT: Leave the "Spunk " there!
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Starting ESP temp serve");
+  Serial.printf("Connecting to %s \n", ssid);
+  digitalWrite(LED_BUILTIN, LOW);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(1000);
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  Serial.println("connected!");
+  digitalWrite(LED_BUILTIN, HIGH);
+
+  dht.begin();
+
+  Serial.printf("Local IP: %s\n", WiFi.localIP().toString().c_str());
+}
+
+void loop() {
+  if(WiFi.status()== WL_CONNECTED){       // Only send on running WiFi
+
+    // get all dem sensor readouts
+    float temp = dht.readTemperature();
+    float humid = dht.readHumidity();
+    
+    if(isnan(temp)) { temp = -1.0; }
+    if(isnan(humid)) { humid = -1.0; }
+    
+    float hi = dht.computeHeatIndex(temp, humid, false);
+
+    
+    // prepare the JSON data structure
+    StaticJsonBuffer<300> JSONbuffer;   //Declaring static JSON buffer
+    JsonObject& JSONencoder = JSONbuffer.createObject(); 
+    
+    JsonObject& eventJSON = JSONencoder.createNestedObject("event");
+    
+    eventJSON["sensorLocation"] = "Sensor Location in the Room";
+    eventJSON["temperature"] = temp;
+    eventJSON["humidity"] = humid;
+    eventJSON["heatindex"] = hi;
+
+    char JSONmessageBuffer[300];
+    JSONencoder.printTo(JSONmessageBuffer);
+    Serial.println(JSONmessageBuffer);
+
+
+    // and now build and send the HTTP POST
+    HTTPClient http; 
+    http.setIgnoreTLSVerifyFailure(true); // this ONLY works with the patched version of PR 2821!
+    
+    http.begin(splunk_collector_url, splunk_collector_cert);
+    http.addHeader("Content-Type", "application/json");
+    http.addHeader("Authorization", splunk_HEC_Token);  
+
+    int httpStatus = http.POST(JSONmessageBuffer);
+    String payload = http.getString();
+
+    Serial.println(httpStatus);   //Print HTTP return code
+    Serial.println(payload);    //Print request response payload
+
+    http.end();
+    
+    delay(60000); // wait for 60 seconds
+  }
+}
+```
