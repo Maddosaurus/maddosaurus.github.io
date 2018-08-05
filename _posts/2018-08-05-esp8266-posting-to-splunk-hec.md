@@ -73,7 +73,7 @@ The code should be somewhat readable, but let me walk you through the main bits:
 
 Splunk expects the JSON in the specific format of `{"event": $some_stuff}`.  
 This is the JSON I am sending with this code:
-```JSON
+```json
 {
     "event":
     {
