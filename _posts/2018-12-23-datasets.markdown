@@ -1,0 +1,30 @@
+---
+layout: post
+title:  "Datasets"
+date:   2018-12-23 19:00
+tags: definitions ml master
+---
+There are various well known and well used datasets that are used in academia.  
+Let's have a look at some of them and their properties. For the final version of my testbench I am using NSL-KDD as well as CICIDS2017.
+
+<!--more-->
+
+## DARPA 1998 & DARPA 1999
+Both datasets are among the oldest and well used ones out there. They were created at the MIT 'Cyber Systems And Technology Group' by using simulated networks in a clean lab environment.
+The older one, [DARPA1998](https://www.ll.mit.edu/r-d/datasets/1998-darpa-intrusion-detection-evaluation-dataset), was created over the course of nine weeks, separated in seven weeks of training and two weeks of test data. Simulated attacks on the network environment can be found in both partitions.  
+Besides the raw TCP traffic this dataset also contains Solaris base security module logs as well as root- and usermode images of the filesystems.  
+Mostly simulated were SNMP, FTP, IRC, E-Mail as well as Webbrowsing. Attacks that were included are DoS, Bruteforce, Buffer Overflows, Port Scans as well as rootkit distribution.  
+[DARPA1999](https://www.ll.mit.edu/r-d/datasets/1999-darpa-intrusion-detection-evaluation-dataset) was not only created in the very same lab as her older sister, DARPA1998, it also features the same attack types, but with more variation. The main difference is the shorter training period of five weeks. The test data was still collected in a two week window, which totals in five instead of nine weeks.  
+Both datasets were curated and refined after their collection.
+
+## KDD1999
+This is considered one of the most widely used datasets for testing Intrusion Detection Systems. [KDD1999](http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html) was created as part of the *Third International Knowledge Discovery and Data Mining
+Tools Competition*. It is based off of DARPA1998 but extends it quite a lot by adding time- and sequence-based analysis data. All in all, KDD1999 contains roughly five million training and 300.000 test data entries.
+
+## NSL-KDD
+The [NSL-KDD](https://github.com/defcom17/NSL_KDD) dataset was created 2009 as an extended and corrected version of KDD1999, as its base contained redundant entries. Another problem of KDD1999 are the proportions of train and test-data entries, as they are not proportional to the original dataset. Compared to KDD1999, NSL-KDD is 75% smaller, as all redundant entries were removed and the dataset has been rebalanced.
+
+## ISCXIDS2012 & CICIDS2017
+Both datasets were created by researchers of the University of New Brunswick. The former in cooperation with the Information Security Centre of Excellence, the latter with the Canadian Institute for Cybersecurity. They are not publicy available, but download links can easily be obtained by mailing the contact mentioned in the respective dataset descriptions.  
+[ISCXIDS2012](https://www.unb.ca/cic/datasets/ids.html) is not only a dataset but also a data generator. It contains HTTP, SMTP, SSH, IMAP, POP3 as well as FTP, bot no HTTPS. The dataset part was recorded over the course of a week. Two days are completely without attacks, the remaining five days are a mixture of legit and malicious traffic. All in all, there were around 2.5 million connections recorded that are available as full PCAPs as well as Netflows.  
+[CICIDS2017](https://www.unb.ca/cic/datasets/ids-2017.html) was created as a reaction on the shortcomings of the other datasets. It is a recent and modern dataset that tries to simulate real world network traffic as close as possible. The dataset spans seven days and contains more than 80 individual features. Recorded attacks in this lab environment include Bruteforce, DoS, Web, Infiltration (Metasploit), as well as Portscans.
