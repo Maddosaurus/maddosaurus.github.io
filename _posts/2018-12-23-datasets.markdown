@@ -2,7 +2,7 @@
 layout: post
 title:  "Datasets"
 date:   2018-12-23 19:00
-tags: definitions ml master
+tags: ml master
 ---
 There are various well known and well used datasets that are used in academia.  
 Let's have a look at some of them and their properties. For the final version of my testbench I am using NSL-KDD as well as CICIDS2017.

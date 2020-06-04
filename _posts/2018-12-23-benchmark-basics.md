@@ -2,7 +2,7 @@
 layout: post
 title:  "Benchmark Basics"
 date:   2018-12-23 20:00
-tags: definitions ml master
+tags: ml master
 ---
 Now that we have this fancy lab, a benchmark is needed for qualitative evaluation of different algorithms and products.  
 For this, I've built a Python 3-based framework for ease of use.

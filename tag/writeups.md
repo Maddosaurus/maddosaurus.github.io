@@ -1,6 +1,6 @@
 ---
 layout: tagpage
 title: "writeups"
-tag: definitions
+tag: writeups
 robots: noindex
 ---
