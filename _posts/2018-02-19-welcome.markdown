@@ -4,6 +4,5 @@ title:  "Welcome"
 date:   2018-02-19 17:33:27 +0100
 tags: misc
 ---
-Hi there! Currently, I am working on my masters' thesis in Computer Science.  
-This blog doubles as kind of memo / definition dump and code snippet collection.  
-Maybe you find something here that you like? If so, don't hesitate to contact me!
+Hi there! I'm Mat and I like to do things.  
+I dabble in IT Sec, SOAR, Malware Analysis, OSINT, CTFs and whatever I find interesting at the moment.  

@@ -16,8 +16,7 @@
 title: Saurus Tech Blog
 email: me@maddosaurus.de
 description: >- # this means to ignore newlines until "baseurl:"
-  Hi there! Currently, I am working on my masters' thesis in Computer Science. 
-  This blog doubles as kind of memo / definition dump and code snippet collection.
+  Hi there! Welcome to this pile of Malware Analysis, OSINT, CTF, ML, SOAR, Automation and more.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: mat_zilla
