@@ -4,7 +4,8 @@ title:  "HTB - Bastion"
 date:   2019-09-06 20:00 +0100
 tags: writeups
 ---
-Link: https://www.hackthebox.eu/home/machines/profile/186
+Writeup for the retired HTB machine Bastion  
+Link: https://www.hackthebox.eu/home/machines/profile/186  
 IP: 10.10.10.134
 
 <!--more-->

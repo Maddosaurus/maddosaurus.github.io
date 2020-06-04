@@ -4,7 +4,8 @@ title:  "HTB - Writeup"
 date:   2019-09-01 20:00 +0100
 tags: writeups
 ---
-Link: https://www.hackthebox.eu/home/machines/profile/192
+Writeup for the retired HTB machine Writeup  
+Link: https://www.hackthebox.eu/home/machines/profile/192  
 IP: 10.10.10.138
 
 <!--more-->

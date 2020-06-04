@@ -4,7 +4,8 @@ title:  "HTB - Swag Shop"
 date:   2019-09-05 20:00 +0100
 tags: writeups
 ---
-Link: hhttps://www.hackthebox.eu/home/machines/profile/188
+Writeup for the retired HTB machine Swag Shop  
+Link: hhttps://www.hackthebox.eu/home/machines/profile/188  
 IP: 10.10.10.140
 
 <!--more-->

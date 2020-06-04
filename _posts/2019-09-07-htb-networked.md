@@ -4,7 +4,8 @@ title:  "HTB - Networked"
 date:   2019-09-07 23:00 +0100
 tags: writeups
 ---
-Link: https://www.hackthebox.eu/home/machines/profile/203
+Writeup for the retired HTB machine Networked  
+Link: https://www.hackthebox.eu/home/machines/profile/203  
 IP: 10.10.10.146
 
 <!--more-->

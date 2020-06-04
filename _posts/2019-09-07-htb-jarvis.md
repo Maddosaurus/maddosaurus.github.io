@@ -4,7 +4,8 @@ title:  "HTB - Jarvis"
 date:   2019-09-07 20:00 +0100
 tags: writeups
 ---
-Link: https://www.hackthebox.eu/home/machines/profile/194
+Writeup for the retired HTB machine Jarvis  
+Link: https://www.hackthebox.eu/home/machines/profile/194  
 IP: 10.10.10.143
 
 <!--more-->
