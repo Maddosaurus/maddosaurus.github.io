@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "HTB - Writeup"
-date:   2019-09-01 20:00 +0100
+date:   2020-06-01 20:00 +0100
 tags: writeups
+initial: 2019-09-01
 ---
 Writeup for the retired HTB machine Writeup  
 Link: https://www.hackthebox.eu/home/machines/profile/192  

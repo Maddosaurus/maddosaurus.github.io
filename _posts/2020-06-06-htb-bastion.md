@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "HTB - Bastion"
-date:   2019-09-06 20:00 +0100
+date:   2020-06-06 20:00 +0100
 tags: writeups
+initial: 2019-09-06
 ---
 Writeup for the retired HTB machine Bastion  
 Link: https://www.hackthebox.eu/home/machines/profile/186  

@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "HTB - Jarvis"
-date:   2019-09-07 20:00 +0100
+date:   2020-06-07 20:00 +0100
 tags: writeups
+initial: 2019-09-07
 ---
 Writeup for the retired HTB machine Jarvis  
 Link: https://www.hackthebox.eu/home/machines/profile/194  
