@@ -8,7 +8,7 @@ Honeypots can provide valuable insights into the threat landscape, both in the o
 
 <!--more-->
 
-This is part 1 of a series detailing deployment considerations and pitfalls of Honeypot deployments.  
+This is part 1 of a series detailing visualization, automation, deployment considerations, and pitfalls of Honeypots.  
 
 As attacks on internet-facing infrastructure shifted to being mostly automated in recent years, Honeypots lost some of their meaning in detecting novel exploits and attacks on said infrastructure. Combined with the fact that the people running Honeypots usually don’t want to give away details on how they customized them to keep them from being detected, this leads to a situation where the value of running them got upstaged. Although the means of operation of attackers has changed, Honeypots still allow valuable insights into ongoing campaigns, used credentials and distributed payloads.  
 
