@@ -3,7 +3,7 @@ layout: post
 title:  "picoCTF 2019 - General Skills"
 date:   2020-06-28 23:00 +0100
 tags: writeups
-
+---
 The picoCTF 2019 contained multiple challenges in the "General" category. As most of these were rather short, they are documented in a collective post rather than single ones.  
 
 <!--more-->
