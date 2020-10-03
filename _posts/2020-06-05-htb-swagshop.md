@@ -43,7 +43,7 @@ That can be uploaded as the image for a new Category (Catalog -> Manage Categori
 If everything worked well, the file will show up under `/media/catalog/category/`.
 Now, to execute the shell, it has to be called. To do that, symlinks need to be activated in System - Configuration - Developer - Template Settings.  
 Then a new *Newsletter Template* has to be created with the following content:  
-`{{block type="core/template" template='../../../../../../media/catalog/category/shell.jpg'}}`  
+`{% raw %}{{block type="core/template" template='../../../../../../media/catalog/category/shell.jpg'}}{% endraw %}`  
 Afterwards, a click on "preview" will force the server to render the php shell. After the shell connects to the local netcat listener, the user flag can be printed.
 
 ## Road to root
