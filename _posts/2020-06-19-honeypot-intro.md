@@ -9,6 +9,7 @@ Honeypots can provide valuable insights into the threat landscape, both in the o
 <!--more-->
 
 This is part 1 of a series detailing visualization, automation, deployment considerations, and pitfalls of Honeypots.  
+An extended version of this article and an according talk can be found at [Virus Bulletin 2020](https://vblocalhost.com/conference/presentations/like-bees-to-a-honeypot-a-journey-through-honeypots/).
 
 As attacks on internet-facing infrastructure shifted to being mostly automated in recent years, Honeypots lost some of their meaning in detecting novel exploits and attacks on said infrastructure. Combined with the fact that the people running Honeypots usually don’t want to give away details on how they customized them to keep them from being detected, this leads to a situation where the value of running them got upstaged. Although the means of operation of attackers has changed, Honeypots still allow valuable insights into ongoing campaigns, used credentials and distributed payloads.  
 
@@ -25,3 +26,5 @@ All three groups have their advantages and use cases. While detail and insight g
 Low and Medium interaction HPs are often developed as scripts being run by an interpreter, i.e. Python. While they provide limited insight and are relatively easy to detect, they can be installed on virtually any OS that is able to run a fitting Python distribution. This could be anything ranging from a Raspberry Pi up to fully fledged standalone Hardware or cloud deployments.  
 High interaction HPs are often based on virtualization or containerization technologies and require a more advanced setup. This includes using sufficiently powerful hardware, configuring the abstraction layer, and setting up VMs or containers.  
 Therefore, goals, budget, and time constraints should be known before deciding which Honeypot will be deployed.  
+
+Continue reading about deploying and customizing your honeypot in [Part 2]({% post_url 2020-11-24-honeypot-deyploment %})!
