@@ -4,7 +4,7 @@ title:  "Honeypot Deployment and Customization"
 date:   2020-11-24 19:00 +0100
 tags: malware
 ---
-eploying Honeypots right is not always straightforward and leaves plenty of room for mistakes. Join me for a while to learn about deployment and customization of Honeypots.
+Deploying Honeypots right is not always straightforward and leaves plenty of room for mistakes. Join me for a while to learn about deployment and customization of Honeypots.
 
 <!--more-->
 
