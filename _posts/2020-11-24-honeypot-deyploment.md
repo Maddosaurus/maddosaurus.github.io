@@ -62,3 +62,5 @@ Besides the fully-fledged production test there are other sanity checks that can
 
 ## Conclusion
 As one can see, there is a lot to consider and check when deploying Honeypots. But don't fret - the work definitely pays off. It is very interesting to watch in realtime what is happening on your systems. But looking at logs isn't that much fun, so join me in the next part for details on sighting and visualizing data!
+
+Continue reading about visualizing all this data in [Part 3]({% post_url 2021-03-05-honeypot-viz %})!
