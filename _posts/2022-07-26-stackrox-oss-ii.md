@@ -5,7 +5,8 @@ date:   2022-07-26 10:00 +0100
 tags: oss howto writeups
 ---
 
-In part 2 of the OSS howto series, we take a look at Community, Collaboration, and Context (read [part 1]({% post_url 2022-07-25-stackrox-oss %}).
+In part 2 of the OSS howto series, we take a look at Community, Collaboration, and Context (read [part 1 here]({% post_url 2022-07-25-stackrox-oss %})).
+<!--more-->
 
 ## Part II: Community, Collaboration, Context
 
