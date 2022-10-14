@@ -124,4 +124,4 @@ Additionally, this is an excellent opportunity for initial external OSS contribu
 For our engineers, little changed. They still work primarily in the upstream repositories, with the main difference that all pull requests and comments are now publicly visible. This change means that teams need to be mindful of how they communicate, even internally, as all comments can be read by external people who might lack the context or shared humor your team has.
 
 
-Join me for part 2, where we take a look at the big C's: Community, Collaboration, and Context
+Continue reading in [part 2]({% post_url 2022-07-26-stackrox-oss-ii %}, where we take a look at the big C's: Community, Collaboration, and Context
