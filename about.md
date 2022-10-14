@@ -13,7 +13,8 @@ If you are interested in deep dives to topics I cover in the blog, have a look a
 
 Year | Conference | Title | Video | Materials
 -----|------------|-------|-------|--------
+2022 | [TROOPERS 22](https://troopers.de/troopers22) | [Kates’ Pot: Finding Attacks Against Kubernetes Deployments](https://troopers.de/troopers22/talks/qltpxn/) | Waiting for Recording | Slides
 2020 | [The Standoff 365](https://standoff365.com) | [Honey, I automated the pots! - Honeypot infrastructure and automation](https://standoff365.com/conferences/447) | Private Upload (TBD) | [Slides](https://www.slideshare.net/secret/B7jLvc5Zdgr28c)
 2020 | [VirusBulletin](https://vblocalhost.com/conference/) | [Like Bees to a Honeypot – A Journey Through Honeypot Deployments](https://vblocalhost.com/conference/presentations/like-bees-to-a-honeypot-a-journey-through-honeypots/) | [YouTube](https://www.youtube.com/watch?v=qf37rPXWT90) | [Paper](https://vblocalhost.com/uploads/VB2020-Meidinger.pdf) & [Slides](https://vblocalhost.com/uploads/VB2020-19.pdf)
 2020 | [CrisisCon](https://crisiscon.net/) | Like Bees to a Honeypot – A Journey Through Honeypot Deployments | |
-2019 | [Troopers 19](https://www.troopers.de/troopers19/) | [Alfred, find the Attacker: A primer on AI and ML applications in the IT Security Domain](https://www.troopers.de/troopers19/agenda/9vb7wn/) | [YouTube](https://www.youtube.com/watch?v=9Gno2ojNJWQ) | [Slides](https://troopers.de/downloads/troopers19/TROOPERS19_DM_Alfred_find_the_Attacker.pdf)
+2019 | [TROOPERS 19](https://www.troopers.de/troopers19/) | [Alfred, find the Attacker: A primer on AI and ML applications in the IT Security Domain](https://www.troopers.de/troopers19/agenda/9vb7wn/) | [YouTube](https://www.youtube.com/watch?v=9Gno2ojNJWQ) | [Slides](https://troopers.de/downloads/troopers19/TROOPERS19_DM_Alfred_find_the_Attacker.pdf)
